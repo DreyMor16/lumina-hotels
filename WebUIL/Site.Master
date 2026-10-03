@@ -1,0 +1,30 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebUIL.Site" %>
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%: Page.Title %> · Lúmina Hotels</title>
+    <link href="Assets/Css/luxury.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body class="portal-body">
+<form id="form1" runat="server">
+    <header class="portal-header">
+        <a class="brand portal-brand" href="PerfilCliente.aspx"><span class="brand-mark" aria-hidden="true">L</span><span>Lúmina</span><small>TRAVEL CLUB</small></a>
+        <nav class="portal-nav" aria-label="Navegación principal">
+            <a class='<%= Request.AppRelativeCurrentExecutionFilePath.EndsWith("PerfilCliente.aspx", System.StringComparison.OrdinalIgnoreCase) ? "active" : "" %>' href="PerfilCliente.aspx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 11.5 12 5l8 6.5V20H4v-8.5Z"/><path d="M9 20v-6h6v6"/></svg><span>Inicio</span></a>
+            <a class='<%= Request.AppRelativeCurrentExecutionFilePath.EndsWith("HacerReserva.aspx", System.StringComparison.OrdinalIgnoreCase) ? "active" : "" %>' href="HacerReserva.aspx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"/><path d="m15 9-2 4-4 2 2-4 4-2Z"/></svg><span>Explorar</span></a>
+            <a class='<%= Request.AppRelativeCurrentExecutionFilePath.EndsWith("MisReservas.aspx", System.StringComparison.OrdinalIgnoreCase) ? "active" : "" %>' href="MisReservas.aspx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 7h14v12H5zM8 4v6M16 4v6M5 11h14"/></svg><span>Mi reserva</span></a>
+            <a class='<%= Request.AppRelativeCurrentExecutionFilePath.EndsWith("ReservaActual.aspx", System.StringComparison.OrdinalIgnoreCase) || Request.AppRelativeCurrentExecutionFilePath.EndsWith("HistorialReservas.aspx", System.StringComparison.OrdinalIgnoreCase) ? "active" : "" %>' href="ReservaActual.aspx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 18 10 8l3 5 2-3 5 8H4Z"/><circle cx="17" cy="6" r="2"/></svg><span>Estancias</span></a>
+        </nav>
+        <div class="portal-account">
+            <a class="portal-profile" href="MiPerfil.aspx"><span class="profile-mini"><%= Server.HtmlEncode((Convert.ToString(Session["Username"]) + "?").Substring(0,1).ToUpperInvariant()) %></span><span><small>Mi cuenta</small><strong><%= Server.HtmlEncode(Convert.ToString(Session["Username"])) %></strong></span></a>
+            <asp:LinkButton ID="btnCerrar" runat="server" OnClick="btnCerrar_Click" CssClass="portal-logout" ToolTip="Cerrar sesión" aria-label="Cerrar sesión">↗</asp:LinkButton>
+        </div>
+    </header>
+    <main class="portal-main"><asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" /></main>
+</form>
+<script src="Assets/Js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.Master.cs" Inherits="WebUIL.AdminMaster" %>
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%: Page.Title %> · Lúmina Gestión</title>
+    <link href="Assets/Css/luxury.css?v=20261002-admin-controls" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body class="admin-control-body">
+<form id="adminForm" runat="server">
+    <header class="control-header">
+        <a class="brand control-brand" href="AdminDashboard.aspx" aria-label="Inicio de Lúmina Gestión">
+            <span class="brand-mark" aria-hidden="true">L</span>
+            <span class="control-brand-copy"><strong>Lúmina</strong><small>GESTIÓN DE ESTANCIAS</small></span>
+        </a>
+
+        <nav class="control-nav" aria-label="Navegación administrativa">
+            <a class='<%= Request.AppRelativeCurrentExecutionFilePath.EndsWith("AdminDashboard.aspx", System.StringComparison.OrdinalIgnoreCase) ? "active" : "" %>' href="AdminDashboard.aspx">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 11.5 12 5l8 6.5V20H4v-8.5Z"/><path d="M9 20v-6h6v6"/></svg><span>Resumen</span>
+            </a>
+            <a class='<%= Request.AppRelativeCurrentExecutionFilePath.EndsWith("AdminReservas.aspx", System.StringComparison.OrdinalIgnoreCase) ? "active" : "" %>' href="AdminReservas.aspx">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 3v6M16 3v6M4 11h16"/></svg><span>Reservaciones</span>
+            </a>
+            <a href="AdminDashboard.aspx#hoteles">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 20V7l7-4 7 4v13"/><path d="M9 20v-5h6v5M8 9h1M12 9h1M16 9h1"/></svg><span>Hoteles</span>
+            </a>
+            <a href="AdminDashboard.aspx#habitaciones">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V9h16v10M4 15h16M7 9V6h5a3 3 0 0 1 3 3"/><path d="M4 19v2M20 19v2"/></svg><span>Habitaciones</span>
+            </a>
+            <a href="AdminDashboard.aspx#mobiliario">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 14V9a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M3 14h18v5H3zM6 19v2M18 19v2"/></svg><span>Inventario</span>
+            </a>
+        </nav>
+
+        <div class="control-account">
+            <a href="PerfilCliente.aspx" class="control-public-link" title="Ver portal del huésped" aria-label="Ver portal del huésped">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 5h5v5M19 5l-8 8"/><path d="M18 13v6H5V6h6"/></svg>
+            </a>
+            <span class="control-avatar"><%= Server.HtmlEncode((Convert.ToString(Session["Username"]) + "?").Substring(0,1).ToUpperInvariant()) %></span>
+            <span class="control-account-copy"><small>ADMINISTRACIÓN</small><strong><%= Server.HtmlEncode(Convert.ToString(Session["Username"])) %></strong></span>
+            <asp:LinkButton ID="btnCerrarAdmin" runat="server" OnClick="btnCerrarAdmin_Click" CssClass="control-logout" ToolTip="Cerrar sesión" aria-label="Cerrar sesión">⌄</asp:LinkButton>
+        </div>
+    </header>
+
+    <main class="control-main">
+        <asp:ContentPlaceHolder ID="AdminContent" runat="server" />
+    </main>
+</form>
+<script src="Assets/Js/site.js"></script>
+</body>
+</html>
